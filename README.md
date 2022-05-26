@@ -1,4 +1,4 @@
-# Base para proyectos en TypeScript :writing_hand:
+# Base para proyectos en TypeScript con MySQL :writing_hand:
 
 Este template esta dirigido a todos aquellos que inician en `TyepScript` un proyecto nuevo. Para usarlo, simplemente tienes hacer un `fork` o usar el botón `use this template`.
 
