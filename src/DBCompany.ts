@@ -56,7 +56,7 @@ class DBCompany {
   }
 
   async getEmployees(): Promise<Employee[]> {
-    const [rows, fields] = await this.pool.query("SELECT * FROM employee");
+    const [rows] = await this.pool.query("SELECT * FROM employee");
     const employees = JSON.parse(JSON.stringify(rows));
     return employees;
   }
