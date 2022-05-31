@@ -24,7 +24,7 @@
   "devDependencies": {
     "@tsconfig/recommended": "^1.0.1",
     "@types/jest": "^27.5.0",
-    "@types/mysql": "^2.15.21",
+    "@types/mysql2": "github:types/mysql2",
     "jest": "^28.1.0",
     "ts-jest": "^28.0.1",
     "ts-node-dev": "^1.1.8",
@@ -32,6 +32,6 @@
   },
   "dependencies": {
     "dotenv": "^16.0.1",
-    "mysql": "^2.18.1"
+    "mysql2": "^2.3.3"
   }
 }
