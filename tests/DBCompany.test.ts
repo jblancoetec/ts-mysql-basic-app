@@ -1,18 +1,18 @@
-import DBCompany from "../src/DBCompany";
+import DBCompany, { createDB, destroyDB } from "../src/DBCompany";
 import dotenv from "dotenv";
 
 dotenv.config();
-let database: DBCompany;
 
 beforeEach(() => {
-  database = new DBCompany();
+  createDB();
 });
 
 afterEach(() => {
-  database.destroy();
+  destroyDB();
 });
 
-test("Deberian existir tres empleados", () => {
-  const employees = database.getUsers();
+test("Deberian existir tres empleados", async () => {
+  const db = new DBCompany();
+  const employees = await db.getEmployees();
   expect(employees.length).toBe(3);
 });
