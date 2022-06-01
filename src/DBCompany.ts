@@ -54,10 +54,13 @@ class DBCompany {
     this.pool = createPool(configPool);
   }
 
+  destructor() {
+    this.pool.end();
+  }
+
   async getEmployees(): Promise<Employee[]> {
     const [rows] = await this.pool.query("SELECT * FROM employee;");
-    const employees = JSON.parse(JSON.stringify(rows));
-    await this.pool.end();
+    const employees = await JSON.parse(JSON.stringify(rows));
     return employees;
   }
 }
