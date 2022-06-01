@@ -1,6 +1,10 @@
-import { createConnection, ConnectionOptions } from "mysql2/promise";
-
-import { createPool, Pool, PoolOptions } from "mysql2";
+import {
+  createConnection,
+  ConnectionOptions,
+  createPool,
+  PoolOptions,
+  Pool,
+} from "mysql2/promise";
 
 export type Employee = {
   id: number;
@@ -8,41 +12,37 @@ export type Employee = {
   salary: number;
 };
 
-const config: ConnectionOptions = {
-  host: process.env.BDD_HOST || "localhost",
-  user: process.env.BDD_USER || "root",
-  password: process.env.BDD_PASS || "newpass",
-};
-
 export const createDB = async () => {
-  try {
-    const connection = await createConnection(config);
-    connection.query(" CREATE DATABASE IF NOT EXISTS company; ");
-    connection.query(" USE company; ");
-    connection.query(
-      " CREATE TABLE employee ( id INT(11) NOT NULL AUTO_INCREMENT, name VARCHAR(45) DEFAULT NULL, salary INT(11) DEFAULT NULL, PRIMARY KEY(id));"
-    );
-    connection.query(
-      " INSERT INTO employee values (1, 'Ryan Ray', 20000), (2, 'Joe McMillan', 40000), (3, 'John Carter', 50000); "
-    );
-    connection.end();
-  } catch (error) {
-    console.log(error);
-  }
+  const config: ConnectionOptions = {
+    host: process.env.BDD_HOST || "localhost",
+    user: process.env.BDD_USER || "root",
+    password: process.env.BDD_PASS || "newpass",
+  };
+  const connection = await createConnection(config);
+  connection.query(" CREATE DATABASE IF NOT EXISTS company; ");
+  connection.query(" USE company; ");
+  connection.query(
+    " CREATE TABLE employee ( id INT(11) NOT NULL AUTO_INCREMENT, name VARCHAR(45) DEFAULT NULL, salary INT(11) DEFAULT NULL, PRIMARY KEY(id));"
+  );
+  connection.query(
+    " INSERT INTO employee values (1, 'Ryan Ray', 20000), (2, 'Joe McMillan', 40000), (3, 'John Carter', 50000); "
+  );
+  await connection.end();
 };
 
 export const destroyDB = async () => {
-  try {
-    const connection = await createConnection(config);
-    connection.query(" DROP DATABASE IF EXISTS company; ");
-    connection.end();
-  } catch (error) {
-    console.log(error);
-  }
+  const config: ConnectionOptions = {
+    host: process.env.BDD_HOST || "localhost",
+    user: process.env.BDD_USER || "root",
+    password: process.env.BDD_PASS || "newpass",
+  };
+  const connection = await createConnection(config);
+  connection.query(" DROP DATABASE IF EXISTS company; ");
+  await connection.end();
 };
 
 class DBCompany {
-  private readonly pool;
+  private readonly pool: Pool;
 
   constructor() {
     const configPool: PoolOptions = {
@@ -51,14 +51,17 @@ class DBCompany {
       password: process.env.BDD_PASS,
       database: "company",
     };
-    const pool = createPool(configPool);
-    this.pool = pool.promise();
+    this.pool = createPool(configPool);
   }
 
   async getEmployees(): Promise<Employee[]> {
-    const [rows] = await this.pool.query("SELECT * FROM employee");
+    const [rows] = await this.pool.query("SELECT * FROM employee;");
     const employees = JSON.parse(JSON.stringify(rows));
     return employees;
+  }
+
+  async close() {
+    await this.pool.end();
   }
 }
 

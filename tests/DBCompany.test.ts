@@ -4,15 +4,20 @@ import dotenv from "dotenv";
 dotenv.config();
 
 beforeEach(() => {
-  createDB();
+  return createDB();
 });
 
 afterEach(() => {
-  destroyDB();
+  return destroyDB();
 });
 
 test("Deberian existir tres empleados", async () => {
-  const db = new DBCompany();
-  const employees = await db.getEmployees();
-  expect(employees.length).toBe(3);
+  try {
+    const db = new DBCompany();
+    const employees = await db.getEmployees();
+    db.close();
+    expect(employees.length).toBe(3);
+  } catch (error) {
+    console.log(error);
+  }
 });
