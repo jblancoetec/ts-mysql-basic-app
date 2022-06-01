@@ -15,7 +15,6 @@ test("Deberian existir tres empleados", async () => {
   try {
     const db = new DBCompany();
     const employees = await db.getEmployees();
-    db.close();
     expect(employees.length).toBe(3);
   } catch (error) {
     console.log(error);
