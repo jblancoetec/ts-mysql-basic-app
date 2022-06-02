@@ -6,6 +6,36 @@ export type Employee = {
   salary: number;
 };
 
+class DBCompany {
+  private readonly config: PoolOptions;
+  constructor() {
+    this.config = {
+      host: process.env.BDD_HOST,
+      user: process.env.BDD_USER,
+      password: process.env.BDD_PASS,
+      database: "company",
+    };
+  }
+
+  private async queryDB(query: string) {
+    const pool = createPool(this.config);
+    try {
+      const [rows] = await pool.query(query);
+      return rows;
+    } catch (error) {
+      console.log(error);
+    } finally {
+      await pool.end();
+    }
+  }
+
+  async getEmployees(): Promise<Employee[]> {
+    const rows = await this.queryDB("SELECT * FROM employee");
+    const employees = await JSON.parse(JSON.stringify(rows));
+    return employees;
+  }
+}
+
 export const createDB = async () => {
   const config: PoolOptions = {
     host: process.env.BDD_HOST || "localhost",
@@ -44,35 +74,5 @@ export const destroyDB = async () => {
     await pool.end();
   }
 };
-
-class DBCompany {
-  private readonly config: PoolOptions;
-  constructor() {
-    this.config = {
-      host: process.env.BDD_HOST,
-      user: process.env.BDD_USER,
-      password: process.env.BDD_PASS,
-      database: "company",
-    };
-  }
-
-  private async queryDB(query: string) {
-    const pool = createPool(this.config);
-    try {
-      const [rows] = await pool.query(query);
-      return rows;
-    } catch (error) {
-      console.log(error);
-    } finally {
-      await pool.end();
-    }
-  }
-
-  async getEmployees(): Promise<Employee[]> {
-    const rows = await this.queryDB("SELECT * FROM employee");
-    const employees = await JSON.parse(JSON.stringify(rows));
-    return employees;
-  }
-}
 
 export default DBCompany;
