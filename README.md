@@ -8,7 +8,7 @@ Procurar tener actualizado `node.js` a la versión lts. Para saber si Node.js es
 - En windows, desde la [pagina oficial](https://nodejs.org/en/), descargando y ejecutando la versión `lts`.
 - En Linux, a través de `nvm`.
     - Abrir una terminal y ejecutar alguno de los siguientes comando
-        
+      
         ```bash
         curl -o- [https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.1/install.sh](https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.1/install.sh) | bash
         ```
@@ -18,7 +18,7 @@ Procurar tener actualizado `node.js` a la versión lts. Para saber si Node.js es
         ```
         
     - Cerrar la terminal y abrir otra para ejecutar el siguiente comando para verificar la correcta instalación`nvm --version` . Una vez observada la versión, ejecutar el siguiente comando para instalar Node.js
-        
+      
         ```bash
         nvm install --lts
         ```

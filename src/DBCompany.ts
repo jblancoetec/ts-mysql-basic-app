@@ -21,7 +21,8 @@ class DBCompany {
     const pool = createPool(this.config);
     try {
       const [rows] = await pool.query(query);
-      return rows;
+      const result = await JSON.parse(JSON.stringify(rows));
+      return result;
     } catch (error) {
       console.log(error);
     } finally {
@@ -30,8 +31,7 @@ class DBCompany {
   }
 
   async getEmployees(): Promise<Employee[]> {
-    const rows = await this.queryDB("SELECT * FROM employee");
-    const employees = await JSON.parse(JSON.stringify(rows));
+    const employees: Employee[] = await this.queryDB("SELECT * FROM employee");
     return employees;
   }
 }
@@ -44,13 +44,13 @@ export const createDB = async () => {
   };
   const pool = createPool(config);
   try {
-    await pool.query(" CREATE DATABASE IF NOT EXISTS company; ");
-    await pool.query(" USE company; ");
+    await pool.query(" create database if not exists company; ");
+    await pool.query(" use company; ");
     await pool.query(
-      " CREATE TABLE employee ( id INT(11) NOT NULL AUTO_INCREMENT, name VARCHAR(45) DEFAULT NULL, salary INT(11) DEFAULT NULL, PRIMARY KEY(id));"
+      " create table employee ( id int(11) not null auto_increment, name varchar(45) default null, salary int(11) default null, primary key(id));"
     );
     await pool.query(
-      " INSERT INTO employee values (1, 'Ryan Ray', 20000), (2, 'Joe McMillan', 40000), (3, 'John Carter', 50000); "
+      " insert into employee values (1, 'Ryan Ray', 20000), (2, 'Joe Mcmillan', 40000), (3, 'John Carter', 50000); "
     );
   } catch (error) {
     console.log(error);
@@ -67,7 +67,7 @@ export const destroyDB = async () => {
   };
   const pool = createPool(config);
   try {
-    await pool.query(" DROP DATABASE IF EXISTS company; ");
+    await pool.query(" drop database if exists company; ");
   } catch (error) {
     console.log(error);
   } finally {
