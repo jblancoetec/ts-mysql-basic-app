@@ -9,27 +9,7 @@ Asegurarse de tener instalado `git` . Esto se puede revisar muy facilmente a tre
 - En linux, a travez del comando `sudo apt install git`.
 - En Windows, a travez de la pagina oficial https://git-scm.com/
 
-Procurar tener actualizado `node.js` a la versión lts. Para saber si Node.js esta instalado en su sistema, abra una terminal y ejecute el siguiente comando `node --version`. El resultado debe ser la versión de node instalada. Si el comando no se encuentra o no se encuentra en la versión lts, se puede instalar Node.js mediante alguno de los siguientes pasos
-
-- En windows, desde la [pagina oficial](https://nodejs.org/en/), descargando y ejecutando la versión `lts`.
-- En Linux, a través de `nvm`.
-    - Abrir una terminal y ejecutar alguno de los siguientes comando
-      
-        ```bash
-        curl -o- [https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.1/install.sh](https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.1/install.sh) | bash
-        ```
-        
-        ```bash
-        wget -qO- [https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.1/install.sh](https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.1/install.sh) | bash
-        ```
-        
-    - Cerrar la terminal y abrir otra para ejecutar el siguiente comando para verificar la correcta instalación`nvm --version` . Una vez observada la versión, ejecutar el siguiente comando para instalar Node.js
-      
-        ```bash
-        nvm install --lts
-        ```
-
-Procurar tener actualizado `node.js` a la versión lts. Para saber si Node.js esta instalado en su sistema, abra una terminal y ejecute el siguiente comando `node --version`. El resultado debe ser la versión de node instalada. Si el comando no se encuentra o no se encuentra en la versión lts, se puede instalar Node.js mediante alguno de los siguientes pasos
+Procurar tener actualizado `node.js` a la versión lts. Si desea asegurarse, puede ejecutar el comando `npm doctor` que le indicara si cumple con los requisitos. Si el comando no se encuentra o `node.js` no se encuentra en la versión lts, se puede instalar mediante alguno de los siguientes pasos
 
 - En windows, desde la [pagina oficial](https://nodejs.org/en/), descargando y ejecutando la versión `lts`.
 - En Linux, a través de `nvm`.
