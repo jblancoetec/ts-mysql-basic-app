@@ -65,9 +65,9 @@ Procurar tener actualizado `node.js` a la versión lts. Para saber si Node.js es
 
 ## Variables de entorno
 
-- `BDD_HOST`: host de la base de datos, por defecto es `localhost`
-- `BDD_USER`: usuario para acceder a la base de datos, por defecto es `root`
-- `BDD_PASS`: contraseña para acceder a la base de datos, por defecto es `newpass`
+- `HOSTDB`: host de la base de datos, por defecto es `localhost`
+- `USERDB`: usuario para acceder a la base de datos, por defecto es `root`
+- `PASSDB`: contraseña para acceder a la base de datos, por defecto es `newpass`
 
 Se puede usar el archivo `.env` para configurar estas variables de entorno en testing y desarrollo. Solo se debe ejecutar el comando `cp .env.example .env`.
 
