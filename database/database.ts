@@ -17,7 +17,7 @@ export const createDB = async () => {
       " insert into employee values (1, 'Ryan Ray', 20000), (2, 'Joe Mcmillan', 40000), (3, 'John Carter', 50000); "
     );
   } catch (error) {
-    console.log(error);
+    console.log("Error al crear base de datos");
   } finally {
     await pool.end();
   }
@@ -33,7 +33,7 @@ export const destroyDB = async () => {
   try {
     await pool.query(" drop database if exists company; ");
   } catch (error) {
-    console.log(error);
+    console.log("Error al eliminar base de datos");
   } finally {
     await pool.end();
   }

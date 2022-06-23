@@ -24,7 +24,7 @@ class DBCompany {
       const result = await JSON.parse(JSON.stringify(rows));
       return result;
     } catch (error) {
-      console.log(error);
+      console.log("Error al ejecutar query: ", query);
     } finally {
       await pool.end();
     }
